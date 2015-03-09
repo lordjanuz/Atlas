@@ -19,7 +19,7 @@ public class PlantaDao {
 			st.setString(4, aPlanta.getDescription());
 			st.execute();
 		} catch (SQLException ex) {
-			System.err.println(ex.getMessage());
+			System.err.println("La Planta Ya Existe..."+ex.getMessage());
 		}
 
 	}
@@ -74,7 +74,7 @@ public class PlantaDao {
 				System.out.println(result.getString("FAMILY"));
 
 				System.out.print("Descripcion: ");
-				System.out.println(result.getString("DESCIPTION"));
+				System.out.println(result.getString("DESCRIPTION"));
 
 				System.out.println("=======================");
 			}
@@ -88,7 +88,7 @@ public class PlantaDao {
 		ResultSet result = null;
 		try {
 			PreparedStatement st = session.connection().prepareStatement(
-					"delete * from PLANTA where CIENTIFICNAME = ?");
+					"delete from PLANTA where CIENTIFICNAME = ?");
 			st.setString(1, nombre);
 			result = st.executeQuery();
 		} catch (SQLException ex) {

@@ -20,7 +20,7 @@ public class AltasTest {
 		String familia = "Araucariaceae";
 		String descripcion = "El nombre del género deriva de la región de Arauco.";
 		PlantaDto planta = new PlantaDto(nombreComun, nombreCientifico,
-				descripcion, familia);
+				familia, descripcion);
 
 		// Perfom
 

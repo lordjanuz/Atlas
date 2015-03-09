@@ -15,7 +15,7 @@ public class PlantaDto {
 	// Constructor
 	// --------------------------------------------------------------------------
 
-	public PlantaDto(String commonName, String cientificName, String description, String family) {
+	public PlantaDto(String commonName, String cientificName, String family, String  description) {
 		this.commonName = commonName;
 		this.cientificName = cientificName;
 		this.family = family;
