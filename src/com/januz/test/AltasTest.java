@@ -47,8 +47,8 @@ public class AltasTest {
 	}
 	@Test
 	public void getPlantaById() {
-
-		dao.getPlantaById("6");
+		PlantaDto aPlanta = new PlantaDto();
+		aPlanta=dao.getPlantaById("6");
 
 	}
 

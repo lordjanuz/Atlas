@@ -96,34 +96,45 @@ public class PlantaDao {
 		}
 	}
 
-	public void getPlantaById(String anId) {
+	public PlantaDto getPlantaById(String anId) {
 		ResultSet result = null;
+		PlantaDto aPlanta;
 		try {
+			
 			PreparedStatement st = session.connection().prepareStatement(
 					"select * from PLANTA where ID = ?");
 			st.setString(1, anId);
 			result = st.executeQuery();
 			while (result.next()) {
+				
+				String description = result.getString("DESCRIPTION");
+				String commonName = result.getString("COMMONNAME");
+				String cientificName = result.getString("CIENTIFICNAME");
+				String family = result.getString("FAMILY");
+				
 				System.out.print("ID: ");
 				System.out.println(result.getInt("id"));
 
 				System.out.print("Nombre comun: ");
-				System.out.println(result.getString("COMMONNAME"));
+				System.out.println(commonName);
 
 				System.out.print("Nombre Cientifico: ");
-				System.out.println(result.getString("CIENTIFICNAME"));
+				System.out.println(cientificName);
 
 				System.out.print("Familia: ");
-				System.out.println(result.getString("FAMILY"));
+				System.out.println(family);
 
 				System.out.print("Descripcion: ");
-				System.out.println(result.getString("DESCRIPTION"));
-
+				System.out.println(description);
 				System.out.println("=======================");
+				
+				aPlanta = new PlantaDto(commonName, cientificName, family, description);
+				return aPlanta;
 			}
 		} catch (SQLException ex) {
 			System.err.println(ex.getMessage() + "Error");
 		}
+		return null;
 	}
 
 }
