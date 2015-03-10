@@ -3,6 +3,7 @@ package com.januz.atlas;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlantaDao {
@@ -27,7 +28,7 @@ public class PlantaDao {
 
 	public List<PlantaDto> listPlanta() {
 		ResultSet result = null;
-		List<PlantaDto> aPlantas;
+		List<PlantaDto> aPlantas= new ArrayList();
 		try {
 			PreparedStatement st = session.connection().prepareStatement(
 					"select * from PLANTA");
@@ -36,7 +37,7 @@ public class PlantaDao {
 				PlantaDto aPlanta = armaPlanta(result);
 				
 				System.out.print("ID: ");
-				System.out.println(aPlanta2.getId());
+				System.out.println(aPlanta.getId());
 
 				System.out.print("Nombre comun: ");
 				System.out.println(aPlanta.getCommonName());
@@ -51,12 +52,14 @@ public class PlantaDao {
 				System.out.println(aPlanta.getDescription());
 
 				System.out.println("=======================");
-				return aPlanta;
+				aPlantas.add(aPlanta);
 				
 			}
+			return aPlantas;
 		} catch (SQLException ex) {
 			System.err.println(ex.getMessage() + "Error");
 		}
+		return null;
 	}
 
 	public PlantaDto getPlantaByCientificName(PlantaDto aPlanta) {
@@ -154,58 +157,3 @@ public class PlantaDao {
 		return new PlantaDto(id, commonName, cientificName, family, description);
 	}	
 }
-
-// EJEMPLO DE
-// SQLITE######################################################################################
-// public void saveAlumno(Alumno alumno){
-// try {
-// PreparedStatement st =
-// connect.prepareStatement("insert into alumnos (nombre, apellidos) values (?,?)");
-// st.setString(1, alumno.getNombre());
-// st.setString(2, alumno.getApellidos());
-// st.execute();
-// } catch (SQLException ex) {
-// System.err.println(ex.getMessage());
-// }
-//
-// }
-// ##########################################################################################################
-
-// public Person findByIssuerAndIdentifier(String issuerIdentifier, String
-// personIdentifier) {
-// return
-// executeSimpleQuery("SELECT p FROM Person p JOIN p.relations r WHERE r.parent.identifier = ?1 AND p.identifier = ?2",
-// issuerIdentifier, personIdentifier);
-// }
-//
-// public Person findByIssuerPersonIdentifierAndRelationshipCode(String
-// issuerIdentifier, String personIdentifier, String relationshipCode) {
-// return
-// executeSimpleQuery("SELECT p FROM Person p JOIN p.relations r where r.parent.identifier = ?1 and p.identifier = ?2  and r.type.code = ?3",
-// issuerIdentifier, personIdentifier,
-// relationshipCode);
-// }
-//
-// public List<Person> findByIssuer(String issuerIdentifier) {
-// return
-// executeQuery("SELECT p FROM Person p JOIN p.relations r WHERE r.parent.identifier = ?1",
-// issuerIdentifier);
-// }
-//
-// public Person findByIdentifier(String anIdentifier) {
-// return executeSimpleQuery("SELECT p FROM Person p WHERE p.identifier = ?1",
-// anIdentifier);
-// }
-//
-// //-----------------------------------------------------------------------------
-// //Constructors
-// //-----------------------------------------------------------------------------
-//
-// public PersonDao(EntityManager anEntityManager) {
-// super(anEntityManager, Person.class);
-// }
-//
-// public PersonDao() {
-// super(Person.class);
-// }
-// }
