@@ -47,8 +47,8 @@ public class AltasTest {
 	}
 	@Test
 	public void getPlantaById() {
-		PlantaDto aPlanta = new PlantaDto();
-		aPlanta=dao.getPlantaById("6");
+		
+		PlantaDto aPlanta=dao.getPlantaById("6");
 
 	}
 
@@ -64,7 +64,7 @@ public class AltasTest {
 		dao.deletePlanta(nombreCientifico);
 
 		// Assert
-		// assertThat(planta.getCommonName()).isEqualTo(nombreComun);
+		 //assertThat(planta.getCommonName()).isEqualTo(nombreComun);
 		// assertThat(planta.getCientificName()).isEqualTo(nombreCientifico);
 		// assertThat(planta.getDescription()).isEqualTo(descripcion);
 	}

@@ -5,9 +5,9 @@ public class PlantaDto {
 	// --------------------------------------------------------------------------
 	// Attributes
 	// --------------------------------------------------------------------------
-
+	private int id;
 	private String commonName;
-	private String cientificName;
+	private String scientificName;
 	private String family;
 	private String description;
 
@@ -15,10 +15,19 @@ public class PlantaDto {
 	// Constructor
 	// --------------------------------------------------------------------------
 
-	public PlantaDto(String commonName, String cientificName, String family, String  description) {
+	public PlantaDto(int id, String commonName, String cientificName,
+			String description, String family) {
+		this.id = id;
 		this.commonName = commonName;
-		this.cientificName = cientificName;
-		this.family = family;
+		this.scientificName = cientificName;
+		this.setFamily(family);
+		this.description = description;
+	}
+	public PlantaDto(String commonName, String cientificName,
+			String description, String family) {
+		this.commonName = commonName;
+		this.scientificName = cientificName;
+		this.setFamily(family);
 		this.description = description;
 	}
 
@@ -30,6 +39,13 @@ public class PlantaDto {
 	// Getters and Setters
 	// --------------------------------------------------------------------------
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getCommonName() {
 		return commonName;
 	}
@@ -39,11 +55,11 @@ public class PlantaDto {
 	}
 
 	public String getCientificName() {
-		return cientificName;
+		return scientificName;
 	}
 
 	public void setCientificName(String cientificName) {
-		this.cientificName = cientificName;
+		this.scientificName = cientificName;
 	}
 
 	public String getDescription() {
