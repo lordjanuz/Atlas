@@ -11,7 +11,13 @@ public class Session {
 	// -- Attributes
 	// --------------------------------------------------------------------------
 
-	String url = "F:\\Atlas.db";
+	// URL PARA CODA
+	String url = "/home/januz/workspace/Atlas/Atlas.db";
+	// URL PARA CASA
+	//String url = "D:\\Atlas.db";
+	
+	// URL PARA CODA
+	//String url = "F:\\Atlas.db";
 	Connection connect;
 
 	public Connection connection(){

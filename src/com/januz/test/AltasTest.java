@@ -18,7 +18,7 @@ public class AltasTest {
 		String nombreComun = "Pehuen";
 		String nombreCientifico = "Araucaria araucana";
 		String familia = "Araucariaceae";
-		String descripcion = "El nombre del género deriva de la región de Arauco.";
+		String descripcion = "El nombre del gï¿½nero deriva de la regiï¿½n de Arauco.";
 		PlantaDto planta = new PlantaDto(nombreComun, nombreCientifico,
 				familia, descripcion);
 
@@ -40,7 +40,7 @@ public class AltasTest {
 		String nombreComun = "Pehuen";
 		String nombreCientifico = "Araucaria araucana";
 		String familia = "Araucariaceae";
-		String descripcion = "El nombre del género deriva de la región de Arauco";
+		String descripcion = "El nombre del gï¿½nero deriva de la regiï¿½n de Arauco";
 		PlantaDto planta = new PlantaDto(nombreComun, nombreCientifico,
 				descripcion, familia);
 		dao.getPlantaByCientificName(planta);
@@ -68,6 +68,7 @@ public class AltasTest {
 		// assertThat(planta.getCientificName()).isEqualTo(nombreCientifico);
 		// assertThat(planta.getDescription()).isEqualTo(descripcion);
 	}
+	@Test
 
 	@After
 	public void exit() {

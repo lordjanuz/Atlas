@@ -23,10 +23,10 @@ public class PlantaDto {
 		this.setFamily(family);
 		this.description = description;
 	}
-	public PlantaDto(String commonName, String cientificName,
+	public PlantaDto(String commonName, String scientificName,
 			String description, String family) {
 		this.commonName = commonName;
-		this.scientificName = cientificName;
+		this.scientificName = scientificName;
 		this.setFamily(family);
 		this.description = description;
 	}
@@ -54,12 +54,12 @@ public class PlantaDto {
 		this.commonName = commonName;
 	}
 
-	public String getCientificName() {
+	public String getScientificName() {
 		return scientificName;
 	}
 
-	public void setCientificName(String cientificName) {
-		this.scientificName = cientificName;
+	public void setScientificName(String scientificName) {
+		this.scientificName = scientificName;
 	}
 
 	public String getDescription() {

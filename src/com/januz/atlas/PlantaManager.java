@@ -12,7 +12,7 @@ public class PlantaManager {
 		PlantaDao daop = new PlantaDao();
 		daop.getPlantaById(aPlantaId);
 		planta.setCommonName(aPlanta.getCommonName());
-		planta.setCientificName(aPlanta.getCientificName());
+		planta.setScientificName(aPlanta.getScientificName());
 		planta.setDescription(aPlanta.getDescription());
 		return planta;
 	}

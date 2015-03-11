@@ -14,14 +14,14 @@ public class PlantaDao {
 			PreparedStatement st = session
 					.connection()
 					.prepareStatement(
-							"insert into PLANTA (COMMONNAME, CIENTIFICNAME, FAMILY, DESCRIPTION) values (?,?,?,?)");
+							"insert into PLANTA (COMMONNAME, SCIENTIFICNAME, FAMILY, DESCRIPTION) values (?,?,?,?)");
 			st.setString(1, aPlanta.getCommonName());
-			st.setString(2, aPlanta.getCientificName());
+			st.setString(2, aPlanta.getScientificName());
 			st.setString(3, aPlanta.getFamily());
 			st.setString(4, aPlanta.getDescription());
 			st.execute();
 		} catch (SQLException ex) {
-			System.err.println("La Planta Ya Existe..."+ex.getMessage());
+			throw new RuntimeException("Hubo un problema al Crear la nueva Planta...");
 		}
 
 	}
@@ -43,7 +43,7 @@ public class PlantaDao {
 				System.out.println(aPlanta.getCommonName());
 
 				System.out.print("Nombre Cientifico: ");
-				System.out.println(aPlanta.getCientificName());
+				System.out.println(aPlanta.getScientificName());
 
 				System.out.print("Familia: ");
 				System.out.println(aPlanta.getFamily());
@@ -62,12 +62,12 @@ public class PlantaDao {
 		return null;
 	}
 
-	public PlantaDto getPlantaByCientificName(PlantaDto aPlanta) {
+	public PlantaDto getPlantaByCientificName(String scientificName) {
 		ResultSet result = null;
 		try {
 			PreparedStatement st = session.connection().prepareStatement(
-					"select * from PLANTA where CIENTIFICNAME = ?");
-			st.setString(1, aPlanta.getCientificName());
+					"select * from PLANTA where SCIENTIFICNAME = ?");
+			st.setString(1, scientificName);
 			result = st.executeQuery();
 			while (result.next()) {
 				PlantaDto aPlanta2 = armaPlanta(result);
@@ -79,7 +79,7 @@ public class PlantaDao {
 				System.out.println(aPlanta2.getCommonName());
 
 				System.out.print("Nombre Cientifico: ");
-				System.out.println(aPlanta2.getCientificName());
+				System.out.println(aPlanta2.getScientificName());
 
 				System.out.print("Familia: ");
 				System.out.println(aPlanta2.getFamily());
@@ -128,7 +128,7 @@ public class PlantaDao {
 				System.out.println(aPlanta.getCommonName());
 
 				System.out.print("Nombre Cientifico: ");
-				System.out.println(aPlanta.getCientificName());
+				System.out.println(aPlanta.getScientificName());
 
 				System.out.print("Familia: ");
 				System.out.println(aPlanta.getFamily());
@@ -151,7 +151,7 @@ public class PlantaDao {
 	private PlantaDto armaPlanta(ResultSet result) throws SQLException {
 		String description = result.getString("DESCRIPTION");
 		String commonName = result.getString("COMMONNAME");
-		String cientificName = result.getString("CIENTIFICNAME");
+		String cientificName = result.getString("SCIENTIFICNAME");
 		String family = result.getString("FAMILY");
 		int id = result.getInt("ID");
 		return new PlantaDto(id, commonName, cientificName, family, description);
