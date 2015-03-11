@@ -1,11 +1,10 @@
 package com.januz.atlas;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
+import spark.Request;
 
 import com.google.gson.Gson;
-
-import spark.Request;
-import spark.Route;
 
 public class PlantaAtlasController {
 	private static Gson gson = new Gson(); 
