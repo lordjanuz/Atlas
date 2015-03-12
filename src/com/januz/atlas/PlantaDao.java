@@ -9,6 +9,7 @@ import java.util.List;
 public class PlantaDao {
 	Session session = new Session();
 
+	// Crea Planta
 	public void createPlanta(PlantaDto aPlanta) throws Exception {
 		try {
 			PreparedStatement st = session
@@ -21,21 +22,23 @@ public class PlantaDao {
 			st.setString(4, aPlanta.getDescription());
 			st.execute();
 		} catch (SQLException ex) {
-			throw new RuntimeException("Hubo un problema al Crear la nueva Planta...");
+			throw new RuntimeException(
+					"Hubo un problema al Crear la nueva Planta...");
 		}
 
 	}
 
+	// Trae Listado Completo de Plantas
 	public List<PlantaDto> listPlanta() {
 		ResultSet result = null;
-		List<PlantaDto> aPlantas= new ArrayList();
+		List<PlantaDto> aPlantas = new ArrayList();
 		try {
 			PreparedStatement st = session.connection().prepareStatement(
 					"select * from PLANTA");
 			result = st.executeQuery();
 			while (result.next()) {
 				PlantaDto aPlanta = armaPlanta(result);
-				
+
 				System.out.print("ID: ");
 				System.out.println(aPlanta.getId());
 
@@ -53,7 +56,7 @@ public class PlantaDao {
 
 				System.out.println("=======================");
 				aPlantas.add(aPlanta);
-				
+
 			}
 			return aPlantas;
 		} catch (SQLException ex) {
@@ -62,6 +65,7 @@ public class PlantaDao {
 		return null;
 	}
 
+	// Trae una Planta por el Nombre Cientifico
 	public PlantaDto getPlantaByCientificName(String scientificName) {
 		ResultSet result = null;
 		try {
@@ -71,7 +75,7 @@ public class PlantaDao {
 			result = st.executeQuery();
 			while (result.next()) {
 				PlantaDto aPlanta2 = armaPlanta(result);
-				
+
 				System.out.print("ID: ");
 				System.out.println(aPlanta2.getId());
 
@@ -96,31 +100,19 @@ public class PlantaDao {
 		return null;
 	}
 
-	public void deletePlanta(String nombre) {
-		@SuppressWarnings("unused")
-		ResultSet result = null;
-		try {
-			PreparedStatement st = session.connection().prepareStatement(
-					"delete from PLANTA where CIENTIFICNAME = ?");
-			st.setString(1, nombre);
-			result = st.executeQuery();
-		} catch (SQLException ex) {
-			System.err.println(ex.getMessage() + "Error");
-		}
-	}
-
+	// Trae una Planta por el Id
 	public PlantaDto getPlantaById(String anId) {
 		ResultSet result = null;
 		try {
-			
+
 			PreparedStatement st = session.connection().prepareStatement(
 					"select * from PLANTA where ID = ?");
 			st.setString(1, anId);
 			result = st.executeQuery();
 			while (result.next()) {
-				
+
 				PlantaDto aPlanta = armaPlanta(result);
-				
+
 				System.out.print("ID: ");
 				System.out.println(result.getInt("id"));
 
@@ -136,7 +128,7 @@ public class PlantaDao {
 				System.out.print("Descripcion: ");
 				System.out.println(aPlanta.getDescription());
 				System.out.println("=======================");
-				
+
 				return aPlanta;
 			}
 		} catch (SQLException ex) {
@@ -144,8 +136,40 @@ public class PlantaDao {
 		}
 		return null;
 	}
+
+	// Edita una planta que pasa el nombre Cientifico
+	public void editaPlanta(PlantaDto aPlanta) {
+		ResultSet result = null;
+		try {
+			PreparedStatement st = session.connection().prepareStatement(
+							"update PLANTA set COMMONNAME = ?, FAMILY=?, DESCRIPTION=? where SCIENTIFICNAME=?");
+			st.setString(1, aPlanta.getCommonName());
+			st.setString(2, aPlanta.getFamily());
+			st.setString(3, aPlanta.getDescription());
+			st.setString(4, aPlanta.getScientificName());
+			result = st.executeQuery();
+
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage() + "Error");
+		}
+	}
+
+	// Elimina una Planta por el Nombre Cientifico
+	public void deletePlanta(String nombre) {
+		@SuppressWarnings("unused")
+		ResultSet result = null;
+		try {
+			PreparedStatement st = session.connection().prepareStatement(
+					"delete from PLANTA where CIENTIFICNAME = ?");
+			st.setString(1, nombre);
+			result = st.executeQuery();
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage() + "Error");
+		}
+	}
+
 	// ------------------------------------------------------------------------------
-	//  Private Methods
+	// Private Methods
 	// ------------------------------------------------------------------------------
 
 	private PlantaDto armaPlanta(ResultSet result) throws SQLException {
@@ -155,5 +179,5 @@ public class PlantaDao {
 		String family = result.getString("FAMILY");
 		int id = result.getInt("ID");
 		return new PlantaDto(id, commonName, cientificName, family, description);
-	}	
+	}
 }

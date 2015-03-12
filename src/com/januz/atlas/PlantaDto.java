@@ -23,6 +23,7 @@ public class PlantaDto {
 		this.setFamily(family);
 		this.description = description;
 	}
+
 	public PlantaDto(String commonName, String scientificName,
 			String description, String family) {
 		this.commonName = commonName;
@@ -46,6 +47,7 @@ public class PlantaDto {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getCommonName() {
 		return commonName;
 	}
