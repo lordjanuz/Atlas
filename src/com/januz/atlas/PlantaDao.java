@@ -70,7 +70,7 @@ public class PlantaDao {
 		ResultSet result = null;
 		try {
 			PreparedStatement st = session.connection().prepareStatement(
-					"select * from PLANTA where SCIENTIFICNAME = ?");
+					"select * from PLANTA where S		CIENTIFICNAME = ?");
 			st.setString(1, scientificName);
 			result = st.executeQuery();
 			while (result.next()) {
@@ -139,7 +139,7 @@ public class PlantaDao {
 
 	// Edita una planta que pasa el nombre Cientifico
 	public void editaPlanta(PlantaDto aPlanta) {
-		ResultSet result = null;
+		int result=0;
 		try {
 			PreparedStatement st = session.connection().prepareStatement(
 							"update PLANTA set COMMONNAME = ?, FAMILY=?, DESCRIPTION=? where SCIENTIFICNAME=?");
@@ -147,7 +147,7 @@ public class PlantaDao {
 			st.setString(2, aPlanta.getFamily());
 			st.setString(3, aPlanta.getDescription());
 			st.setString(4, aPlanta.getScientificName());
-			result = st.executeQuery();
+			result = st.executeUpdate();
 
 		} catch (SQLException ex) {
 			System.err.println(ex.getMessage() + "Error");
