@@ -23,7 +23,7 @@ public class PlantaDao {
 			st.execute();
 		} catch (SQLException ex) {
 			throw new RuntimeException(
-					"Hubo un problema al Crear la nueva Planta...");
+					"Hubo un problema al Crear la nueva Planta...", ex);
 		}
 
 	}
@@ -70,7 +70,7 @@ public class PlantaDao {
 		ResultSet result = null;
 		try {
 			PreparedStatement st = session.connection().prepareStatement(
-					"select * from PLANTA where S		CIENTIFICNAME = ?");
+					"select * from PLANTA where SCIENTIFICNAME = ?");
 			st.setString(1, scientificName);
 			result = st.executeQuery();
 			while (result.next()) {
@@ -160,7 +160,7 @@ public class PlantaDao {
 		ResultSet result = null;
 		try {
 			PreparedStatement st = session.connection().prepareStatement(
-					"delete from PLANTA where CIENTIFICNAME = ?");
+					"delete from PLANTA where SCIENTIFICNAME = ?");
 			st.setString(1, nombre);
 			result = st.executeQuery();
 		} catch (SQLException ex) {

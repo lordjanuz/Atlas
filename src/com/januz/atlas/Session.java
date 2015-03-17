@@ -39,6 +39,7 @@ public class Session {
 	public void close() {
 		try {
 			connect.close();
+			System.out.println("Desconectado");
 		} catch (SQLException ex) {
 			Logger.getLogger("Error al cerrar la Conexion: " + ex);
 		}
